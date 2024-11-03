@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nhấp vào màn hình để tải xuống PDF</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            cursor: pointer;
+            background-color: #f0f0f0;
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .message {
+            font-size: 24px;
+            color: #333;
+        }
+    </style>
+</head>
+<body onclick="downloadPdf()">
+    <div class="message">Nhấp vào màn hình để tải xuống PDF</div>
+
+    <script>
+        let downloadInitiated = false; // Cờ để đảm bảo chỉ tải xuống một lần
+
+        function downloadPdf() {
+            if (downloadInitiated) {
+                return; // Ngăn không cho tải xuống lần nữa
+            }
+            
+            downloadInitiated = true; // Đặt cờ khi bắt đầu tải xuống
+
+            // URL đến file PDF cần tải xuống (đảm bảo đường dẫn đúng)
+            var pdfUrl = '/file/linux-all-in-one-for-dummies-5th-edition.pdf'; // Đường dẫn từ thư mục dự án web
+
+            // Tạo một element <a> để tải xuống file
+            var downloadLink = document.createElement('a');
+            downloadLink.href = pdfUrl;
+            downloadLink.download = 'linux-all-in-one-for-dummies-5th-edition.pdf'; // Tên file khi tải xuống
+            document.body.appendChild(downloadLink);
+
+            // Kích hoạt hành động tải xuống
+            downloadLink.click();
+
+            // Gỡ bỏ thẻ <a> khỏi DOM
+            document.body.removeChild(downloadLink);
+        }
+    </script>
+</body>
+</html>
